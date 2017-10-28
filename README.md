@@ -12,7 +12,7 @@
 ## TLDR - Build latest btcgpu 
 ```
 git clone https://github.com/zerobane/dockerfiles.git
-cd btcgpu 
+cd dockerfiles/btcgpu 
 docker build -t ubuntu/btcgpu .
 ```
 
