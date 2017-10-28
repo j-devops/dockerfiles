@@ -1,10 +1,8 @@
 # zero_mining dockerfiles
 
 ### Assumptions:  
-Docker installed
-nvidia-docker installed (only needed for mining or accessing GPUs)  Gives a Shim to allow you access to video cards.
-
-note: this was tested / built under centos 7.3
+1.  Docker installed
+2.  nvidia-docker installed (only needed for mining or accessing GPUs)  
 
 ### Generic Build docker image
 1. download file to a directory
