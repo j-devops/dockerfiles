@@ -13,7 +13,10 @@
 ```
 git clone https://github.com/zerobane/dockerfiles.git
 cd dockerfiles/btcgpu 
-docker build -t ubuntu/btcgpu .
+./build_btcgpu.sh
+./run_btcgpu.sh
+Once in container:
+start_bgoldd
 ```
 
 ### Other stuff:
