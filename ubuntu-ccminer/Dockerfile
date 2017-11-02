@@ -4,7 +4,7 @@ RUN groupadd -g 2000 miner && \
     useradd -u 2000 -g miner -m -s /bin/bash miner && \
     echo 'miner:miner' | chpasswd
 RUN apt-get -y update
-RUN apt-get -y install git automake libssl-dev libcurl4-openssl-dev
+RUN apt-get -y install git automake libssl-dev libcurl4-openssl-dev wget
 
 USER miner
 
