@@ -14,7 +14,10 @@ RUN apt-get update && apt-get install -y \
     python3 \
     libx11-xcb-dev \
     libfontconfig-dev \
-    vim
+    vim \
+    nmap \
+    net-tools 
+    
 
 #RUN apt-get -y install curl git automake bsdmainutils python3 libx11-xcb-dev libfontconfig-dev vim libssl-dev libcurl4-openssl-dev build-essential libtool autotools-dev pkg-config libevent-dev bsdmainutils libsodium-dev
 #RUN apt-get -y install libboost-all-dev software-properties-common
@@ -32,14 +35,18 @@ RUN cd /root/BTCGPU/depends && make
 #make some pasta time
 RUN cd /root/BTCGPU/ && ./autogen.sh && ./configure --without-gui --prefix=/root/BTCGPU/depends/x86_64-pc-linux-gnu/ && make
 
+#setup pass for cli commands
+RUN mkdir /root/.bitcoingold/
+RUN printf "rpcuser=bitcoin\nrpcpassword=bitcoin\nrpcport=18332" > /root/.bitcoingold/bitcoin.conf
+
 #create a run script for bgoldd
-RUN echo "bgoldd -testnet -rest -server -datadir=/share/ -rpcallowip=127.0.0.0/8 -printtoconsole" > /usr/bin/start_bgoldd && chmod 755 /usr/bin/start_bgoldd
+RUN echo "bgoldd -rest -datadir=/share/ -gen=0 -dns=1 -listen=1 -daemon=1 -rpcallowip=0.0.0.0/0 -rpcport=18332 -rpcbind=0.0.0.0 -rpcuser=bitcoin -showmetrics -rpcpassword=bitcoin -printtoconsole" > /usr/bin/start_bgoldd && chmod 755 /usr/bin/start_bgoldd
 
 #copy files around
 RUN cp /root/BTCGPU/src/bitcoin-tx /usr/bin/.
 RUN cp /root/BTCGPU/src/bgold-cli /usr/bin/.
 RUN cp /root/BTCGPU/src/bgoldd /usr/bin/.
 
-
+EXPOSE 18332
 
 

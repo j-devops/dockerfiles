@@ -16,4 +16,5 @@ RUN cd ~/ccminer && ./autogen.sh && ./configure && make
 RUN cd && git clone https://github.com/alexis78/ccminer.git alexis78-ccminer
 RUN cd ~/alexis78-ccminer && ./autogen.sh && ./configure && make
 
-
+USER root
+RUN apt-get -y install vim
