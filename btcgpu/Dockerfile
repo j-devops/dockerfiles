@@ -47,6 +47,6 @@ RUN cp /root/BTCGPU/src/bitcoin-tx /usr/bin/.
 RUN cp /root/BTCGPU/src/bgold-cli /usr/bin/.
 RUN cp /root/BTCGPU/src/bgoldd /usr/bin/.
 
-EXPOSE 18332
+EXPOSE 8338
 
 
