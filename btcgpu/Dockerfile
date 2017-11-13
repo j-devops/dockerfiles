@@ -16,6 +16,8 @@ RUN apt-get update && apt-get install -y \
     libfontconfig-dev \
     vim \
     nmap \
+    rsyslog\
+    nmap\
     net-tools 
     
 
@@ -33,14 +35,17 @@ RUN cd && git clone https://github.com/BTCGPU/BTCGPU.git
 RUN cd /root/BTCGPU/depends && make
 
 #make some pasta time
-RUN cd /root/BTCGPU/ && ./autogen.sh && ./configure --without-gui --prefix=/root/BTCGPU/depends/x86_64-pc-linux-gnu/ && make
+RUN cd /root/BTCGPU/ && ./autogen.sh && ./configure --without-gui --prefix=/root/BTCGPU/depends/x86_64-pc-linux-gnu/ --disabled-shared && make -j 4
 
 #setup pass for cli commands
 RUN mkdir /root/.bitcoingold/
 RUN printf "rpcuser=bitcoin\nrpcpassword=bitcoin\nrpcport=18332" > /root/.bitcoingold/bitcoin.conf
 
 #create a run script for bgoldd
-RUN echo "bgoldd -rest -addnode=45.56.84.44 -datadir=/share/ -gen=0 -dns=1 -listen=1 -daemon=1 -rpcallowip=0.0.0.0/0 -rpcport=8338 -rpcbind=0.0.0.0 -rpcuser=bitcoin -showmetrics -rpcpassword=bitcoin -printtoconsole" > /usr/bin/start_bgoldd && chmod 755 /usr/bin/start_bgoldd
+RUN echo "bgoldd -rest -addnode=45.56.84.44 -addnode=109.201.133.93 -addnode=206.221.179.22 -datadir=/share/ -gen=0 -dns=1 -listen=1 -rpcallowip=0.0.0.0/0 -rpcbind=0.0.0.0 -rpcuser=bitcoin -showmetrics -rpcpassword=bitcoin -printtoconsole" > /usr/bin/start_bgoldd && chmod 755 /usr/bin/start_bgoldd
+
+#check valid chain
+RUN echo "bgold-cli getblockhash 499437" > /usr/bin/check_bgoldd && chmod 755 /usr/bin/check_bgoldd
 
 #copy files around
 RUN cp /root/BTCGPU/src/bitcoin-tx /usr/bin/.
