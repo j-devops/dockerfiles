@@ -35,7 +35,7 @@ RUN cd && git clone https://github.com/BTCGPU/BTCGPU.git
 RUN cd /root/BTCGPU/depends && make
 
 #make some pasta time
-RUN cd /root/BTCGPU/ && ./autogen.sh && ./configure --without-gui --prefix=/root/BTCGPU/depends/x86_64-pc-linux-gnu/ --disabled-shared && make 
+RUN cd /root/BTCGPU/ && ./autogen.sh && ./configure --without-gui --prefix=/root/BTCGPU/depends/x86_64-pc-linux-gnu/ --disable-shared && make 
 
 #setup pass for cli commands
 RUN mkdir /root/.bitcoingold/
