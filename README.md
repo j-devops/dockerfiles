@@ -9,7 +9,7 @@
 2. docker build -t unbuntu/ccminer .
 3. nvidia-docker run -it -v /etc/localtime:/etc/localtime:ro ubuntu/ccminer
 
-## TLDR - Build latest btcgpu 
+## TLDR - Build 0.15 btcgpu 
 ```
 git clone https://github.com/zerobane/dockerfiles.git
 cd dockerfiles/btcgpu 
