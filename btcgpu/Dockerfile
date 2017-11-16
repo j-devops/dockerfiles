@@ -21,15 +21,11 @@ RUN apt-get update && apt-get install -y \
     net-tools 
     
 
-#RUN apt-get -y install curl git automake bsdmainutils python3 libx11-xcb-dev libfontconfig-dev vim libssl-dev libcurl4-openssl-dev build-essential libtool autotools-dev pkg-config libevent-dev bsdmainutils libsodium-dev
-#RUN apt-get -y install libboost-all-dev software-properties-common
-#RUN add-apt-repository ppa:bitcoin/bitcoin
-#RUN apt-get update
-#RUN apt-get -y install libdb4.8-dev libdb4.8++-dev libminiupnpc-dev libzmq3-dev
-#RUN apt-get -y install libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
-
 #clone latest BTCGPU from git
 RUN cd && git clone https://github.com/BTCGPU/BTCGPU.git
+
+#switch to 0.15 branch
+RUN cd /root/BTCGPU && git fetch && git checkout 0.15
 
 #make the depends
 RUN cd /root/BTCGPU/depends && make
