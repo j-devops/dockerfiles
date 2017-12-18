@@ -9,7 +9,7 @@
 2. docker build -t unbuntu/ccminer .
 3. nvidia-docker run -it -v /etc/localtime:/etc/localtime:ro ubuntu/ccminer
 
-## TLDR - Build 0.15 btcgpu 
+##Build 0.15 btcgpu 
 ```
 git clone https://github.com/zerobane/dockerfiles.git
 cd dockerfiles/btcgpu 
@@ -17,6 +17,34 @@ cd dockerfiles/btcgpu
 ./run_btcgpu.sh
 Once in container:
 start_bgoldd
+```
+
+##Run altcom coin build
+```
+Basically create a /share on host and enter a altcommunitycoin.conf using your values.
+
+ie:
+root@mpool:~/dockerfiles/altcomcoin# cat /share/altcom/altcommunitycoin.conf
+listen=1
+server=1
+daemon=1
+datatdir=/share/.
+maxconnections=500
+rpcuser=myuser
+rpcpassword=mypass
+port=29855
+rpcport=28855
+rpcconnect=127.0.0.1
+addnode=109.230.231.216:29855
+addnode=109.230.231.221:29855
+addnode=188.68.56.33
+addnode=multi.zpools.de
+addnode=ZPools.de
+
+Then:
+build-altcom.sh
+run-altcom.sh
+
 ```
 
 ### Other stuff:

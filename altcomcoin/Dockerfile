@@ -18,16 +18,61 @@ RUN apt-get update && apt-get install -y \
     nmap \
     rsyslog\
     nmap\
-    net-tools 
-    
+    qt5-qmake \
+    libqt5scintilla2-dev \
+    net-tools \
+    icu-devtools libboost-all-dev libboost-atomic-dev libboost-atomic1.54-dev \
+    libboost-atomic1.54.0 libboost-chrono-dev libboost-chrono1.54-dev \
+    libboost-chrono1.54.0 libboost-context-dev libboost-context1.54-dev \
+    libboost-context1.54.0 libboost-coroutine-dev libboost-coroutine1.54-dev \
+    libboost-date-time-dev libboost-date-time1.54-dev libboost-date-time1.54.0 \
+    libboost-dev libboost-exception-dev libboost-exception1.54-dev \
+    libboost-filesystem-dev libboost-filesystem1.54-dev \
+    libboost-filesystem1.54.0 libboost-graph-dev libboost-graph-parallel-dev \
+    libboost-graph-parallel1.54-dev libboost-graph-parallel1.54.0 \
+    libboost-graph1.54-dev libboost-graph1.54.0 libboost-iostreams-dev \
+    libboost-iostreams1.54-dev libboost-iostreams1.54.0 libboost-locale-dev \
+    libboost-locale1.54-dev libboost-locale1.54.0 libboost-log-dev \
+    libboost-log1.54-dev libboost-log1.54.0 libboost-math-dev \
+    libboost-math1.54-dev libboost-math1.54.0 libboost-mpi-dev \
+    libboost-mpi-python-dev libboost-mpi-python1.54-dev \
+    libboost-mpi-python1.54.0 libboost-mpi1.54-dev libboost-mpi1.54.0 \
+    libboost-program-options-dev libboost-program-options1.54-dev \
+    libboost-program-options1.54.0 libboost-python-dev libboost-python1.54-dev \
+    libboost-python1.54.0 libboost-random-dev libboost-random1.54-dev \
+    libboost-random1.54.0 libboost-regex-dev libboost-regex1.54-dev \
+    libboost-regex1.54.0 libboost-serialization-dev \
+    libboost-serialization1.54-dev libboost-serialization1.54.0 \
+    libboost-signals-dev libboost-signals1.54-dev libboost-signals1.54.0 \
+    libboost-system-dev libboost-system1.54-dev libboost-system1.54.0 \
+    libboost-test-dev libboost-test1.54-dev libboost-test1.54.0 \
+    libboost-thread-dev libboost-thread1.54-dev libboost-thread1.54.0 \
+    libboost-timer-dev libboost-timer1.54-dev libboost-timer1.54.0 \
+    libboost-tools-dev libboost-wave-dev libboost-wave1.54-dev \
+    libboost-wave1.54.0 libboost1.54-dev libboost1.54-tools-dev libcr0 \
+    libdb++-dev libdb-dev libdb5.3++ libdb5.3++-dev libdb5.3-dev libhwloc-dev \
+    libhwloc-plugins libhwloc5 libibverbs-dev libibverbs1 libicu-dev libicu52 \
+    libminiupnpc-dev libminiupnpc8 libnuma1 libopenmpi-dev libopenmpi1.6 \
+    libpci-dev libpci3 libpciaccess0 libpython-dev libpython2.7-dev \
+    libqrencode-dev libqrencode3 libssl-dev libssl-doc libtorque2 libxml2-dev \
+    mpi-default-bin mpi-default-dev ocl-icd-libopencl1 openmpi-bin \
+    openmpi-common
+ 
+   
 
 #clone latest  from git
 RUN cd && git clone https://github.com/altcommunitycoin/altcommunitycoin-skunk.git
 
-#RUN cd /root/altcommunitycoin-skunk/src/leveldb && \
-#chmod +x build_detect_platform && \
-#make clean && make libleveldb.a libmemenv.a && \
-#make -f makefile.unix  
+
+RUN cd /root/altcommunitycoin-skunk/src/leveldb && \
+chmod +x build_detect_platform && \
+make clean && make libleveldb.a libmemenv.a && \
+cd .. && \
+make -f makefile.unix  
+
+RUN cp /root/altcommunitycoin-skunk/src/altcommunitycoind /usr/bin/.
+
+
 
 #make the depends
 #RUN cd /root/BTCGPU/depends && make
