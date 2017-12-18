@@ -72,7 +72,7 @@ make -f makefile.unix
 
 RUN cp /root/altcommunitycoin-skunk/src/altcommunitycoind /usr/bin/.
 
-
+EXPOSE 28855
 
 #make the depends
 #RUN cd /root/BTCGPU/depends && make
